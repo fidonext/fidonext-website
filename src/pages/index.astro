@@ -1,0 +1,509 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const heroHighlights = [
+	{
+		title: 'Full-spectrum comms.',
+		body: 'Messages, hefty file transfers, plus low-latency audio and video calls inside one mesh.',
+	},
+	{
+		title: 'Decentralized storage.',
+		body: 'File persistence aligns with Filecoin or similar decentralized storage layers.',
+	},
+	{
+		title: 'Serverless speed.',
+		body: 'Latency comparable to WhatsApp or Telegram, without central servers.',
+	},
+	{
+		title: 'Traffic camouflage.',
+		body: 'MASQUE, JA3/ALPN mimicry, and timing obfuscation for hostile networks.',
+	},
+	{
+		title: 'Fully open source.',
+		body: 'Every component lives in public repos under permissive licenses.',
+	},
+];
+
+const missionPromises = ['No ads', 'No profiling', 'No data resale'];
+
+const missionValues = [
+	{
+		title: 'Digital Humanity',
+		body: 'Communication is a right, not a corporate product. Person-to-person, without intermediaries.',
+	},
+	{
+		title: 'Community-Powered',
+		body: 'Users run the nodes, shape the mesh, and revive the spirit of the original FidoNet.',
+	},
+	{
+		title: 'Post-Server Internet',
+		body: 'Messaging that works without Big Tech infrastructure. No central servers to seize or silence.',
+	},
+];
+
+const whatCards = [
+	{
+		title: 'Application Layer · Native clients',
+		body: 'Cross-platform interface built for chats, calls, media, and offline-first flows across desktop and mobile.',
+	},
+	{
+		title: 'Crypto Layer · libsignal-client',
+		body: 'X3DH, Double Ratchet, prekeys, sealed sender — the same modern protections trusted by Signal.',
+	},
+	{
+		title: 'Network Layer · libp2p mesh',
+		body: 'QUIC / HTTP3, MASQUE fallback, NAT traversal, Circuit-Relay v2, GossipSub, DHT + PEX discovery.',
+	},
+];
+
+const features = [
+	{
+		title: 'Signal-grade E2E',
+		body: 'libsignal-client sessions with sealed sender, metadata minimization, and SRTP overlays for calls.',
+	},
+	{
+		title: 'Mesh routing',
+		body: 'Pure libp2p transport, Circuit-Relay fallback, NAT traversal, opportunistic onion paths.',
+	},
+	{
+		title: 'HTTPS camouflage',
+		body: 'QUIC/HTTP3 over 443, MASQUE CONNECT-UDP, browser-grade JA3 & ALPN fingerprints.',
+	},
+	{
+		title: 'On-device identity',
+		body: 'PeerID = Ed25519, usernames in `/pxn/username/<name>` DHT entries, profiles replicated via contacts.',
+	},
+	{
+		title: 'Store-and-forward',
+		body: 'Encrypted buffers on relay nodes with TTL windows (1–24h) and deterministic ACK/resend.',
+	},
+	{
+		title: 'Chunked files',
+		body: '512 KB shards with AES-GCM + Reed–Solomon FEC, addressed by CID, delivered even while recipients are offline.',
+	},
+	{
+		title: 'Community channels',
+		body: 'GossipSub overlays, MLS groups, PubSub-based channels with regional relay caches.',
+	},
+	{
+		title: 'Ethos-first',
+		body: 'No ads, no profiling, no data resale. Ever.',
+	},
+];
+
+const developerStack = [
+	'Rust',
+	'rust-libp2p',
+	'TOKIO / async',
+	'QUIC / HTTP3',
+	'MASQUE',
+	'Noise / TLS1.3',
+	'C++ / Qt / QML',
+	'Swift / Kotlin',
+	'libsignal-client',
+	'MLS (TreeKEM)',
+];
+
+const developerFocus = [
+	'Mesh transport evolution: Circuit-Relay v2 chains, NAT traversal, hole punching, MASQUE fallbacks.',
+	'Mobile energy optimization, push/poll hybrid for iOS & Android, and background delivery.',
+	'Store-and-forward relays, TTL persistence, CID-based chunk storage.',
+	'Crypto hardening: MLS research, metadata shielding, SRTP over Signal sessions.',
+	'Super-relay DevOps, telemetry that respects privacy, and fractal scaling experiments.',
+];
+
+const roadmap = [
+	{
+		phase: 'M1',
+		title: 'Base P2P messenger',
+		status: 'Live',
+		items: [
+			'PeerManager & MessageChannel built on rust-libp2p with ACK/retry.',
+			'libsignal-client (X3DH + Double Ratchet) for 1:1 chats.',
+			'Pre-key bundle exchange via DHT entries or QR handshakes.',
+			'Pure P2P chat tests across every native surface.',
+		],
+	},
+	{
+		phase: 'M2.1',
+		title: 'Store-and-forward + relay mesh',
+		status: 'In Progress',
+		items: [
+			'Circuit-Relay v2 chaining (A → R1 → R2 → B).',
+			'Encrypted message buffers on relays with TTL windows and ACK handshakes.',
+			'Bootstrap super-relays on commodity VPS for stability.',
+			'Reuse native offline states across desktop and mobile for pending messages.',
+		],
+	},
+	{
+		phase: 'M2.2',
+		title: 'Push notifications',
+		status: 'In Design',
+		items: [
+			'Hybrid push/poll strategy for Android (FCM) and iOS (APNs).',
+			'Opt-in lightweight relay hints without exposing metadata.',
+		],
+	},
+	{
+		phase: 'M3',
+		title: 'Files & media',
+		status: 'Planned',
+		items: [
+			'512 KB chunks with AES-GCM + Reed–Solomon FEC.',
+			'Relay-chain delivery with offline pickup and auto-delete by TTL.',
+			'Reuse the existing file-sharing UI, swap the backend to CID routing.',
+		],
+	},
+	{
+		phase: 'M4',
+		title: 'Audio / video on libp2p',
+		status: 'Planned',
+		items: [
+			'Replace DHT signaling with pure libp2p QUIC streams.',
+			'Wire the media stack to libp2p (ICE/SDP inside the mesh).',
+			'Relay-assisted media for NAT/CGNAT situations + SRTP over Signal.',
+		],
+	},
+	{
+		phase: 'M5',
+		title: 'Groups & PubSub',
+		status: 'Next',
+		items: [
+			'GossipSub overlays per groupID with MLS (TreeKEM) cryptography.',
+			'Group UI refresh + sub-relay caches for offline members.',
+		],
+	},
+	{
+		phase: 'M6.1',
+		title: 'Channels & broadcast topics',
+		status: 'Next',
+		items: [
+			'1→N channels propagated through regional PubSub meshes.',
+			'Relay caches store the latest events and serve them via CID lookups.',
+			'UI adds lightweight subscription logic for creators and readers.',
+		],
+	},
+	{
+		phase: 'M6.2',
+		title: 'On-device content moderation',
+		status: 'Next',
+		items: [
+			'Local LLM screens text / media before publishing.',
+			'Policy files signed by project keys, distributed as encrypted CID packages.',
+			'Publisher sees live rules; relays can flag non-verified posts.',
+		],
+	},
+	{
+		phase: 'M6.3',
+		title: 'Mesh bots & SDK',
+		status: 'Next',
+		items: [
+			'API & SDK delivery: unified REST/gRPC layer plus TypeScript, Rust, Go, and Python clients for Telegram-speed integrations.',
+			'Conversation-grade workflows for moderation, mesh notifications, DevOps hooks, and user assistants.',
+			'Secure execution sandboxes with signed permissions and scoped access to mesh data/keys to preserve privacy.',
+		],
+	},
+	{
+		phase: 'M7',
+		title: 'Traffic camouflage & DPI resilience',
+		status: 'Future',
+		items: [
+			'Browser-like JA3 / ALPN signatures over QUIC/HTTP3 443.',
+			'MASQUE CONNECT-UDP fallback, onion 2-hop paths, padding & timing shaping.',
+			'Super-relays operate as HTTPS edges.',
+		],
+	},
+	{
+		phase: 'M8',
+		title: 'Fractal scaling',
+		status: 'Future',
+		items: [
+			'Realm → Region → Cell sharded DHTs with hierarchical PubSub.',
+			'HyParView / Cyclon partial views, CDN-grade super-relays with TTL stores.',
+			'Proof-of-Work and rate limiting for public channels.',
+		],
+	},
+];
+
+const roles = [
+	{
+		title: 'CTO / Protocol Architect',
+		body: 'Needs deep experience across Security/Crypto, protocol architecture, and P2P networks to own libp2p routing design, privacy posture, and long-term scaling.',
+	},
+	{
+		title: 'Rust Core Developers',
+		body: 'Tokio async, rust-libp2p, QUIC/HTTP3, MASQUE, libsignal integration, store-and-forward, Ed25519/Curve25519/AES-GCM.',
+	},
+	{
+		title: 'C++ / Qt UI Developers',
+		body: 'Qt/QML messenger UX, multimedia, Rust ↔ C++ FFI (CXX/UniFFI), cross-platform builds.',
+	},
+	{
+		title: 'Kotlin / Swift Mobile Developers',
+		body: 'Rust inside Android/iOS, push (FCM/APNs), secure storage, BLE/QR discovery, messenger UX polish.',
+	},
+	{
+		title: 'P2P / Network Engineers',
+		body: 'libp2p/IPFS/Filecoin stack, GossipSub, Circuit-Relay, DPI evasion, route simulations, WebRTC pipelines.',
+	},
+	{
+		title: 'Security / Crypto Engineers',
+		body: 'libsignal-client, MLS, X3DH/Double Ratchet, metadata obfuscation, threat modeling, audit readiness.',
+	},
+	{
+		title: 'Marketing / PR',
+		body: 'Growth storytelling for privacy tech, open-source community building, SMM across X, Telegram, LinkedIn.',
+	},
+];
+
+const footerLinks = [
+	{ label: 'GitHub', href: 'https://github.com/fidonext' },
+	{ label: 'X / Twitter', href: 'https://twitter.com/fidonext' },
+	{ label: 'Privacy', href: '/privacy' },
+	{ label: 'Terms', href: '/terms' },
+];
+---
+
+<Layout>
+	<main class="page">
+		<section class="hero" id="hero">
+			<div class="hero__copy hero__copy--center">
+				<p class="hero__label">Private. Fast. Decentralized.</p>
+				<h1 class="hero__headline">
+					<span class="hero__headline-line">FidoNext — the open-source mesh</span>
+					<span class="hero__headline-line">for private communication</span>
+				</h1>
+				<p class="hero__lede">Inspired by FidoNet, rebuilt for the 2026 Internet.</p>
+			</div>
+		</section>
+
+		<section class="value-props" id="value-props">
+			<div class="value-grid">
+				<div class="value-card">
+					<div class="value-card__icon">
+						<img src="/confidential-discussion.png" alt="" aria-hidden="true" />
+					</div>
+					<h3>Privacy by Default</h3>
+					<p>End-to-end encryption using modern protocols (Signal-grade crypto: X3DH, Double Ratchet).</p>
+				</div>
+				<div class="value-card">
+					<div class="value-card__icon">
+						<img src="/online-interview.png" alt="" aria-hidden="true" />
+					</div>
+					<h3>Decentralized Mesh Transport</h3>
+					<p>Message relay and routing built on libp2p: QUIC, GossipSub, MASQUE fallback.</p>
+				</div>
+				<div class="value-card">
+					<div class="value-card__icon">
+						<img src="/time-fast.png" alt="" aria-hidden="true" />
+					</div>
+					<h3>High Performance &amp; Low Latency</h3>
+					<p>Fast communication, optimized NAT traversal, low overhead, resilient transport.</p>
+				</div>
+				<div class="value-card">
+					<div class="value-card__icon">
+						<img src="/population-globe.png" alt="" aria-hidden="true" />
+					</div>
+					<h3>Open Source &amp; Community Driven</h3>
+					<p>Transparent code, open governance, built by engineers for engineers.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="mission mission-feature">
+			<div class="mission-grid">
+				<div class="mission-text">
+					<span class="mission-label">MISSION</span>
+					<h2>A human communications network that belongs to people, not corporations.</h2>
+					<p>FidoNext returns control of digital life to the humans who use it. We build an open, decentralized mesh where cooperation replaces corporate infrastructure.</p>
+					<div class="mission-tags">
+						<span>No ads</span>
+						<span>No profiling</span>
+						<span>No data resale</span>
+					</div>
+				</div>
+				<div class="mission-visual">
+					<div class="mesh-node"></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="fido-stack" id="what-is-fidonext">
+			<div class="stack-header">
+				<p class="stack-header__sub">Signal’s privacy, without Signal’s servers.</p>
+				<h2>What is FidoNext?</h2>
+				<p>A privacy-native peer-to-peer mesh built on modern cryptography and decentralized transport.</p>
+			</div>
+			<div class="stack-grid">
+				<div class="stack-layer">
+					<h3>Application Layer</h3>
+					<p>Cross-platform messaging, media, calls, and offline-first communication clients.</p>
+				</div>
+				<div class="stack-layer">
+					<h3>Crypto Layer</h3>
+					<p>X3DH, Double Ratchet, sealed sender, metadata-minimized identity and end-to-end encryption.</p>
+				</div>
+				<div class="stack-layer">
+					<h3>Network Layer</h3>
+					<p>libp2p mesh: QUIC, HTTP/3, MASQUE fallback, NAT traversal, gossip routing, resilient multi-relay paths.</p>
+				</div>
+				<div class="stack-layer">
+					<h3>Transport &amp; Relay Layer</h3>
+					<p>Store-and-forward relays, offline pickup, TTL windows, CID-addressed file delivery and FEC shards.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="vision-panel" id="human">
+			<div class="vision-grid">
+				<div class="vision-text">
+					<span class="mission-label">HUMAN-FIRST DECENTRALIZATION, NOT ANARCHY</span>
+					<h2>A positive, people-owned vision.</h2>
+					<p>
+						We acknowledge the need to moderate criminal and illegal content. We refuse to become an unchecked haven like Telegram, yet we will never compromise private conversations. Public 1→N channels will ship
+						with on-device LLM moderation — custom models running locally, flagging socially dangerous content before publication, while 1→1 chats and closed groups remain private.
+					</p>
+				</div>
+				<div class="vision-cards">
+					{missionValues.map((pillar) => (
+						<div class="vision-card">
+							<span>{pillar.title}</span>
+							<p>{pillar.body}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="section roadmap" id="roadmap">
+			<span class="mission-label roadmap-label">ROADMAP</span>
+			<h2>From 1:1 chats to a billion-node mesh.</h2>
+			<p class="body-text roadmap__intro">Layered development keeps us sane: application, crypto, network, then Fidonext Core to orchestrate it all.</p>
+			<ol class="roadmap__timeline">
+				{roadmap.map((entry) => (
+					<li class="roadmap__phase">
+						<header>
+							<span class="roadmap__badge">{entry.phase}</span>
+							<div>
+								<h3>{entry.title}</h3>
+								<p>{entry.status}</p>
+							</div>
+						</header>
+						<ul>
+							{entry.items.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+					</li>
+				))}
+			</ol>
+		</section>
+
+		<section class="section developers" id="developers">
+			<div class="developers__content">
+				<div>
+					<span class="mission-label">FOR DEVELOPERS</span>
+					<h2>The post-server internet is a collaboration.</h2>
+					<p class="body-text">Rust, C++/Qt, libsignal, libp2p, QUIC, MASQUE — plus the unstoppable curiosity to build for people first.</p>
+				</div>
+				<div class="stack-chips">
+					{developerStack.map((tech) => (
+						<span>{tech}</span>
+					))}
+				</div>
+				<ul class="dev-focus">
+					{developerFocus.map((focus) => (
+						<li>{focus}</li>
+					))}
+				</ul>
+			</div>
+		</section>
+
+		<section id="team" class="team-section">
+			<div class="team-header">
+				<span class="team-label">Team / Hiring</span>
+				<h2 class="team-title">People-powered technology needs people-powered teams.</h2>
+				<p class="team-subtitle">
+					We are a community-driven open-source project. Volunteers, part-timers, and core contributors are all welcome. Be a part of early dev team!
+				</p>
+			</div>
+			<div class="team-grid">
+				<div class="team-card">
+					<h3 class="team-role">CTO / Protocol Architect</h3>
+					<ul>
+						<li>Security/Crypto expertise</li>
+						<li>P2P routing design & scaling</li>
+						<li>Long-term architecture leadership</li>
+					</ul>
+				</div>
+				<div class="team-card">
+					<h3 class="team-role">Rust Core Developers</h3>
+					<ul>
+						<li>tokio async / QUIC / HTTP3</li>
+						<li>libp2p stack, MASQUE</li>
+						<li>Store-and-forward pipeline</li>
+					</ul>
+				</div>
+				<div class="team-card">
+					<h3 class="team-role">C++ / Qt UI Developers</h3>
+					<ul>
+						<li>Cross-platform messenger UI</li>
+						<li>Multimedia & performance</li>
+						<li>C++/Qt/QML builds</li>
+					</ul>
+				</div>
+				<div class="team-card">
+					<h3 class="team-role">Kotlin / Swift Mobile</h3>
+					<ul>
+						<li>Android/iOS networking</li>
+						<li>Secure storage, BLE/QR discovery</li>
+						<li>Messenger UX polish</li>
+					</ul>
+				</div>
+				<div class="team-card">
+					<h3 class="team-role">P2P / Network Engineers</h3>
+					<ul>
+						<li>libp2p IPFS/Filecoin-style stacks</li>
+						<li>DPI evasion, NAT traversal</li>
+						<li>Route simulations & relays</li>
+					</ul>
+				</div>
+				<div class="team-card">
+					<h3 class="team-role">Security / Crypto Engineers</h3>
+					<ul>
+						<li>MLS, X3DH/Double Ratchet</li>
+						<li>Threat modeling & audits</li>
+						<li>Metadata obfuscation</li>
+					</ul>
+				</div>
+				<div class="team-card">
+					<h3 class="team-role">Marketing / PR</h3>
+					<ul>
+						<li>Growth storytelling</li>
+						<li>Open-source community building</li>
+						<li>Social media & comms</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="cta" id="cta">
+			<div>
+				<p class="section__eyebrow">Call to action</p>
+				<h2>Join the mesh while it’s still growing.</h2>
+				<p class="body-text">Open-source license. Transparent roadmap. Built by people, for people. The next chapter after FidoNet, Signal, WhatsApp, Telegram etc.</p>
+			</div>
+			<a class="btn btn--solid" href="mailto:dev@fidonext.org">Join the builders</a>
+		</section>
+
+		<footer class="footer">
+			<div>© 2025 FidoNext Mesh Collective — decentralized messaging for the era of digital humanity.</div>
+			<div class="footer-links">
+				{footerLinks.map((link) => (
+					<a href={link.href}>{link.label}</a>
+				))}
+			</div>
+		</footer>
+	</main>
+</Layout>
+

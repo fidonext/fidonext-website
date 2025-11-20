@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+
+const {
+	title = 'FidoNext — inspired by FidoNet, rebuilt for the 2025 Internet.',
+	description = 'FidoNext is a global libp2p mesh with Signal-grade encryption for unstoppable, people-owned communication.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+		<link rel="apple-touch-icon" href="/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://fidonext.org" />
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta name="theme-color" content="#020205" />
+	</head>
+	<body data-nav-open="false">
+		<header class="site-header">
+			<div class="site-header__inner">
+				<a class="site-logo" href="/" aria-label="FidoNext home">
+					<span class="site-logo__icon" aria-hidden="true"></span>
+				</a>
+				<div class="site-header__tray" id="primary-tray">
+					<nav class="site-nav" aria-label="Primary navigation">
+						<a href="#hero">Product</a>
+						<a href="#roadmap">Roadmap</a>
+						<a href="#developers">For Developers</a>
+						<a href="#team">Roles</a>
+					</nav>
+					<a class="btn btn--solid site-header__cta" href="mailto:dev@fidonext.org">JOIN THE BUILDERS</a>
+				</div>
+				<button class="site-nav__toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-tray">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+			</div>
+		</header>
+		<slot />
+		<script is:inline>
+			const navToggle = document.querySelector('.site-nav__toggle');
+			const body = document.body;
+			const navLinks = document.querySelectorAll('.site-nav a');
+
+			const closeNav = () => {
+				body.setAttribute('data-nav-open', 'false');
+				if (navToggle) {
+					navToggle.setAttribute('aria-expanded', 'false');
+				}
+			};
+
+			navToggle?.addEventListener('click', () => {
+				const isOpen = body.getAttribute('data-nav-open') === 'true';
+				body.setAttribute('data-nav-open', String(!isOpen));
+				navToggle.setAttribute('aria-expanded', String(!isOpen));
+			});
+
+			navLinks.forEach((link) => {
+				link.addEventListener('click', () => {
+					if (window.innerWidth < 960) {
+						closeNav();
+					}
+				});
+			});
+
+			window.addEventListener('resize', () => {
+				if (window.innerWidth >= 960) {
+					closeNav();
+				}
+			});
+		</script>
+	</body>
+</html>
