@@ -227,12 +227,12 @@ const roadmap = [
 
 const roles = [
 	{
-		title: 'CTO / Protocol Architect',
-		body: 'Needs deep experience across Security/Crypto, protocol architecture, and P2P networks to own libp2p routing design, privacy posture, and long-term scaling.',
+		title: 'CTO / System Architect',
+		body: 'Needs deep experience across Security/Crypto, system architecture, and P2P networks to own libp2p routing design, privacy posture, and long-term scaling.',
 	},
 	{
-		title: 'Rust Core Developers',
-		body: 'Tokio async, rust-libp2p, QUIC/HTTP3, MASQUE, libsignal integration, store-and-forward, Ed25519/Curve25519/AES-GCM.',
+		title: 'Rust & P2P Engineers',
+		body: 'Tokio async, Rust-libp2p, QUIC/HTTP3 + MASQUE, libsignal, store-and-forward messaging, Ed25519/Curve25519/AES-GCM security, IPFS/Filecoin + GossipSub relays, DPI-evasion.',
 	},
 	{
 		title: 'C++ / Qt UI Developers',
@@ -243,12 +243,8 @@ const roles = [
 		body: 'Rust inside Android/iOS, push (FCM/APNs), secure storage, BLE/QR discovery, messenger UX polish.',
 	},
 	{
-		title: 'P2P / Network Engineers',
-		body: 'libp2p/IPFS/Filecoin stack, GossipSub, Circuit-Relay, DPI evasion, route simulations, WebRTC pipelines.',
-	},
-	{
 		title: 'Security / Crypto Engineers',
-		body: 'libsignal-client, MLS, X3DH/Double Ratchet, metadata obfuscation, threat modeling, audit readiness.',
+		body: 'libsignal-client, MLS, X3DH/Double Ratchet, metadata obfuscation, threat modeling, MITM hardening, audit readiness.',
 	},
 	{
 		title: 'Marketing / PR',
@@ -428,62 +424,12 @@ const footerLinks = [
 				</p>
 			</div>
 			<div class="team-grid">
-				<div class="team-card">
-					<h3 class="team-role">CTO / Protocol Architect</h3>
-					<ul>
-						<li>Security/Crypto expertise</li>
-						<li>P2P routing design & scaling</li>
-						<li>Long-term architecture leadership</li>
-					</ul>
-				</div>
-				<div class="team-card">
-					<h3 class="team-role">Rust Core Developers</h3>
-					<ul>
-						<li>tokio async / QUIC / HTTP3</li>
-						<li>libp2p stack, MASQUE</li>
-						<li>Store-and-forward pipeline</li>
-					</ul>
-				</div>
-				<div class="team-card">
-					<h3 class="team-role">C++ / Qt UI Developers</h3>
-					<ul>
-						<li>Cross-platform messenger UI</li>
-						<li>Multimedia & performance</li>
-						<li>C++/Qt/QML builds</li>
-					</ul>
-				</div>
-				<div class="team-card">
-					<h3 class="team-role">Kotlin / Swift Mobile</h3>
-					<ul>
-						<li>Android/iOS networking</li>
-						<li>Secure storage, BLE/QR discovery</li>
-						<li>Messenger UX polish</li>
-					</ul>
-				</div>
-				<div class="team-card">
-					<h3 class="team-role">P2P / Network Engineers</h3>
-					<ul>
-						<li>libp2p IPFS/Filecoin-style stacks</li>
-						<li>DPI evasion, NAT traversal</li>
-						<li>Route simulations & relays</li>
-					</ul>
-				</div>
-				<div class="team-card">
-					<h3 class="team-role">Security / Crypto Engineers</h3>
-					<ul>
-						<li>MLS, X3DH/Double Ratchet</li>
-						<li>Threat modeling & audits</li>
-						<li>Metadata obfuscation</li>
-					</ul>
-				</div>
-				<div class="team-card">
-					<h3 class="team-role">Marketing / PR</h3>
-					<ul>
-						<li>Growth storytelling</li>
-						<li>Open-source community building</li>
-						<li>Social media & comms</li>
-					</ul>
-				</div>
+				{roles.map((role) => (
+					<div class="team-card">
+						<h3 class="team-role">{role.title}</h3>
+						<p>{role.body}</p>
+					</div>
+				))}
 			</div>
 		</section>
 
