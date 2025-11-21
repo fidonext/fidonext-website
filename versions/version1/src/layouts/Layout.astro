@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+
+const {
+	title = 'FidoNext — inspired by FidoNet, rebuilt for the 2025 Internet.',
+	description = 'FidoNext is a global libp2p mesh with Signal-grade encryption for unstoppable, people-owned communication.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+		<link rel="apple-touch-icon" href="/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://fidonext.org" />
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta name="theme-color" content="#020205" />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+

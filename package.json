@@ -1,0 +1,18 @@
+{
+  "name": "fidonext-website",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "FidoNext — inspired by FidoNet, rebuilt for the 2025 Internet. A global mesh network for secure, unstoppable communication.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "astro": "^5.15.9"
+  }
+}
