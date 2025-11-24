@@ -103,30 +103,23 @@ img {
 	font-size: 0.85rem;
 }
 .site-logo__icon {
-	width: 92px;
-	height: 66px;
+	width: 96px;
+	height: 72px;
 	display: block;
-	background-image: url('/logo-fidonext-dog.png');
-	background-size: contain;
+	background-image: url('/Fido_logo_new.png');
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
+	border-radius: 18px;
 	filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.3));
 	flex-shrink: 0;
-	transition: background-image 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+	transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
 }
 
 .site-logo:hover .site-logo__icon {
-	background-image: linear-gradient(135deg, #14f195 0%, #00e7ff 70%, #8b5cf6 100%);
-	mask-image: url('/logo-fidonext-dog.png');
-	mask-size: contain;
-	mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-image: url('/logo-fidonext-dog.png');
-	-webkit-mask-size: contain;
-	-webkit-mask-repeat: no-repeat;
-	-webkit-mask-position: center;
-	filter: drop-shadow(0 10px 24px rgba(20, 241, 149, 0.35));
+	filter: drop-shadow(0 12px 26px rgba(20, 241, 149, 0.35));
 	transform: translateY(-2px);
+	box-shadow: 0 0 25px rgba(20, 241, 149, 0.25);
 }
 
 .site-header__tray {
@@ -183,8 +176,8 @@ img {
 
 .site-nav__toggle {
 	display: none;
-	width: 44px;
 	height: 44px;
+	padding: 0 1.3rem 0 1rem;
 	border-radius: 999px;
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	background: rgba(8, 12, 30, 0.85);
@@ -192,29 +185,69 @@ img {
 	cursor: pointer;
 	justify-content: center;
 	align-items: center;
-	gap: 5px;
-	transition: border-color 0.2s ease, background 0.2s ease;
+	gap: 0.65rem;
+	transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
-.site-nav__toggle span {
-	display: block;
-	width: 18px;
-	height: 2px;
-	background: #fff;
+.site-nav__toggle-label {
+	font-size: 0.72rem;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: #f4f6ff;
+}
+
+.site-nav__toggle-icon {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.site-nav__toggle-icon::before,
+.site-nav__toggle-icon::after {
+	content: '';
+	position: absolute;
+	background: #f4f6ff;
 	border-radius: 999px;
-	transition: transform 0.2s ease, opacity 0.2s ease;
+	transition: transform 0.25s ease, width 0.25s ease, height 0.25s ease;
 }
 
-body[data-nav-open='true'] .site-nav__toggle span:nth-child(1) {
-	transform: translateY(6px) rotate(45deg);
+.site-nav__toggle-icon::before {
+	width: 12px;
+	height: 2px;
 }
 
-body[data-nav-open='true'] .site-nav__toggle span:nth-child(2) {
-	opacity: 0;
+.site-nav__toggle-icon::after {
+	width: 2px;
+	height: 12px;
 }
 
-body[data-nav-open='true'] .site-nav__toggle span:nth-child(3) {
-	transform: translateY(-6px) rotate(-45deg);
+body[data-nav-open='true'] .site-nav__toggle {
+	border-color: var(--accent-1);
+	box-shadow: 0 0 20px rgba(20, 241, 149, 0.25);
+}
+
+body[data-nav-open='true'] .site-nav__toggle-label {
+	color: var(--accent-1);
+}
+
+body[data-nav-open='true'] .site-nav__toggle-icon {
+	border-color: var(--accent-1);
+}
+
+body[data-nav-open='true'] .site-nav__toggle-icon::before {
+	transform: rotate(45deg);
+	width: 14px;
+}
+
+body[data-nav-open='true'] .site-nav__toggle-icon::after {
+	transform: rotate(-45deg);
+	width: 14px;
+	height: 2px;
 }
 
 .section {
